@@ -35,7 +35,8 @@ module.exports = function(passport) {
   }));
 
   passport.use(new FacebookStrategy({
-    clientID : '1665012003749906',
+    // my Facebook App Information
+    clientID : '1665012003749906  ',
     clientSecret : 'fa94f7e00cdde468b3c93444a39e1f9f',
     callbackURL : 'http://localhost:3000/auth/facebook/callback',
     profileFields : ["emails", "displayName", "name", "photos"]
@@ -63,6 +64,7 @@ module.exports = function(passport) {
             user.facebook.id = profile.id;
             user.facebook.token = profile.token;
             user.facebook.photo = profile.photos[0].value;
+            user.facebook.address = profile.address;
             user.save(function(err) {
               if (err) {
                 return done(err);

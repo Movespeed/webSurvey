@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-  h1 글 작성
+  h1 설문 작성
   
   form(action='/posts', method='POST')
     .form-group
@@ -13,8 +13,11 @@ block content
     .form-group
       label(for='content') 내용
       textarea.form-control(name='content')
+      hr
+    a.btn.btn-primary.btn-mini 설문추가
+    hr
     .form-action
       a.btn.btn-default(href='javascript:window.history.back();') 뒤로 
       | &nbsp;
-      button.btn.btn-primary(type='submit') 설문제작
+      button.btn.btn-default(type='submit') 설문제작
   
