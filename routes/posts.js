@@ -3,16 +3,8 @@ var express = require('express'),
     Comment = require('../models/comment');
 var router = express.Router();
 
-function needAuth(req, res, next) {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    req.flash('danger', '로그인이 필요합니다.');
-    res.redirect('/signin');
-  }
-}
 /* GET posts listing. */
-router.get('/',needAuth, function(req, res, next) {
+router.get('/', function(req, res, next) {
   Post.find({}, function(err, docs) {
     if (err) {
       return next(err);
@@ -23,21 +15,6 @@ router.get('/',needAuth, function(req, res, next) {
 
 router.get('/new', function(req, res, next) {
   res.render('posts/new');
-});
-
-router.post('/', function(req, res, next) {
-  var post = new Post({
-    title: req.body.title,
-    email: req.body.email,
-    content: req.body.content
-  });
-
-  post.save(function(err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/posts');
-  });
 });
 
 router.get('/:id', function(req, res, next) {
